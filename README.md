@@ -129,11 +129,7 @@ wgslTagFn/* wgsl */`
 Similar to `wgsl` nodes for representing node snippets, `wgslTagCode` can be used to construct code snippets with the same dependency systems.
 
 ```js
-const inlineAdd = ( name, value ) => wgslTagCode/* wgsl */`
-
-  ${ name } += ${ value };
-  
-`;
+const inlineAdd = ( name, value ) => wgslTagCode/* wgsl */`${ name } += ${ value };`;
 
 wgslTagFn/* wgsl */`
   fn compute() -> void {
