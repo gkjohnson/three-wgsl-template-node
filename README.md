@@ -6,11 +6,13 @@ Prototype for [template tag function](https://developer.mozilla.org/en-US/docs/W
 // before
 wgslFn( /* wgsl */`
   fn traverse( ray: Ray ) -> RayIntersection {
-    // ...    
+
     let hit = interesectsBounds( ray );
     let vertex0 = attributes.value[ hit.indices.x ];
+
     // ...
     return hit;
+
   }
 `, [
   rayStruct, intersectionStruct, attributesStruct,
@@ -24,23 +26,63 @@ wgslTagFn`
   
   // fn
   fn traverse( ray: ${ rayStruct } ) -> ${ intersectionStruct } {
-    // ...    
+
     let hit = ${ intersectsBoundsFn( 'ray' ) };
     let vertex0 = ${ attributesStorage }[ hit.indices.x ];
+
     // ...
     return hit;
+
   }
 `;
 ```
 
 ## Features
 
+### Structs
+
+Structs definitions can be used in string-literal wgsl functions without relying on hardcoded variable names.
+
+```js
+const rayStruct = struct( {
+  origin: 'vec3f',
+  direction: 'vec3f',
+} );
+
+wgslFn/* wgsl */`
+  fn transformRay( ray: ${ rayStruct }, mat: mat4x4f ) -> ${ rayStruct } {
+
+    var resultRay: Ray;
+    resultRay.origin = ( mat * vec4( ray.origin, 1 ) ).xyz;
+    resultRay.direction = ( mat * vec4( ray.direction, 0 ) ).xyz;
+    return resultRay;
+
+  }
+`;
+```
+
+### Buffers & Arrays
+
+Storage buffers can be used without making assumptions about structure of the shader variable layout.
+
+```js
+const myStorageBuffer = storage( new StorageBufferAttribute( new Float32Array( arr ), 4 ), 'vec4f' );
+
+wgslTagFn`
+  fn fn( globaId: vec3u ) -> void {
+
+    let value = ${ myStorageBuffer }[ globalId.x ];
+
+  }
+`;
+```
+
 ### Functions
 
 Function names or calls can be integrated using template literals that are evaluated & inlined on node material construction. Functions can be used to reference local variables using string literals of local variables in the function or referencing other availabe TSL variable nodes.
 
 ```js
-wgslFn( /* wgsl */`
+wgslTagFn/* wgsl */`
   fn compute() -> void {
   
     let input = 10.0;
@@ -51,7 +93,7 @@ wgslFn( /* wgsl */`
     let result = ${ myFun( { varName: 'input' } ) };
   
   }
-` );
+`;
 ```
 
 ### Variable Includes
@@ -65,7 +107,7 @@ const constants = wgsl( `
   let PI = 3.14159;
 ` );
 
-wgslFn( /* wgsl */`
+wgslTagFn/* wgsl */`
 
   ${ [ constants ] }
   
@@ -79,6 +121,26 @@ wgslFn( /* wgsl */`
     let result = func( ${ PI } );
   
   }
-` );
+`;
 ```
 
+### Code Snippets
+
+Similar to `wgsl` nodes for representing node snippets, `wgslTagCode` can be used to construct code snippets with the same dependency systems.
+
+``js
+const inlineAdd = ( name, value ) => wgslTagCode/* wgsl */`
+
+  ${ name } += ${ value };
+  
+`;
+
+wgslTagFn/* wgsl */`
+  fn compute() -> void {
+
+    var x = 10;
+    ${ inlineAdd( 'x', 5 ) }
+
+  }
+`;
+```
