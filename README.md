@@ -39,7 +39,7 @@ wgslTagFn`
 
 Function names or calls can be integrated using template literals that are evaluated & inlined on node material construction. Functions can be used to reference local variables using string literals of local variables in the function or referencing other availabe TSL variable nodes.
 
-```
+```js
 wgslFn( /* wgsl */`
   fn compute() -> void {
   
@@ -58,7 +58,7 @@ wgslFn( /* wgsl */`
 
 Other includes for dependencies that are relied on for hardcoded variable names can continue to be included using arrays.
 
-```
+```js
 const PI = float( 3.14159 );
 
 const constants = wgsl( `
