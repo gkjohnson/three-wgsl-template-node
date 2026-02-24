@@ -1,3 +1,8 @@
+/*
+* https://github.com/gkjohnson/three-wgsl-template-node/
+* by Garrett Johnson
+*/
+
 import { CodeNode, FunctionNode, Node } from 'three/webgpu';
 
 // minimal node that outputs a raw WGSL expression verbatim when built
