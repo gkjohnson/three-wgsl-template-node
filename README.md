@@ -1,6 +1,6 @@
 # three-wgsl-template-node
 
-Prototype for [template tag function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) integration with three.js' "wgsl" and "glsl" nodes function and code snippet nodes to enable more intuitive declaration of shader code while continuing to enable benefits and integrating with the dependency graph of three.js' TSL.
+Originally developed for use in three-mesh-bvh and three-gpu-pathtracer, this is an in-progress prototype for [template tag function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) integration with three.js' "wgsl" and "glsl" function and code snippet nodes to enable more intuitive shader declarations while continuing to enable integration into TSL.
 
 The necessary node and tag functions are available in the [./WGSLTagFnNode.js](https://github.com/gkjohnson/three-wgsl-template-node/blob/main/WGSLTagFnNode.js) file.
 
