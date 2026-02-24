@@ -39,7 +39,9 @@ wgslTagFn`
 
 ## Features
 
-### Structs
+### WgslTagFn & WgslTgCode
+
+#### Structs
 
 Structs definitions can be used in string-literal wgsl functions without relying on hardcoded variable names.
 
@@ -61,7 +63,7 @@ wgslFn/* wgsl */`
 `;
 ```
 
-### Buffers & Arrays
+#### Buffers & Arrays
 
 Storage buffers can be used without making assumptions about structure of the shader variable layout.
 
@@ -77,7 +79,7 @@ wgslTagFn`
 `;
 ```
 
-### Functions
+#### Functions
 
 Function names or calls can be integrated using template literals that are evaluated & inlined on node material construction. Functions can be used to reference local variables using string literals of local variables in the function or referencing other availabe TSL variable nodes.
 
@@ -96,7 +98,7 @@ wgslTagFn/* wgsl */`
 `;
 ```
 
-### Variable Includes
+#### Variable Includes
 
 Other includes for dependencies that are relied on for hardcoded variable names can continue to be included using arrays.
 
@@ -124,7 +126,7 @@ wgslTagFn/* wgsl */`
 `;
 ```
 
-### Code Snippets
+#### Code Snippets
 
 Similar to `wgsl` nodes for representing node snippets, `wgslTagCode` can be used to construct code snippets with the same dependency systems.
 
