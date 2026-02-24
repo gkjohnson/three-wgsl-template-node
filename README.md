@@ -2,8 +2,10 @@
 
 Prototype for [template tag function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) integration with three.js' "wgsl" and "glsl" nodes function and code snippet nodes to enable more intuitive declaration of shader code while continuing to enable benefits and integrating with the dependency graph of three.js' TSL.
 
+The necessary node and tag functions are available in the [./WGSLTagFnNode.js](https://github.com/gkjohnson/three-wgsl-template-node/blob/main/WGSLTagFnNode.js) file.
+
+**Before**
 ```js
-// before
 wgslFn( /* wgsl */`
   fn traverse( ray: Ray ) -> RayIntersection {
 
@@ -18,8 +20,10 @@ wgslFn( /* wgsl */`
   rayStruct, intersectionStruct, attributesStruct,
   attributesStorage, intersectsBoundsFn, constants
 ] );
+```
 
-// after
+**After**
+```js
 wgslTagFn`
   // raw includes
   ${ [ constants ] }
