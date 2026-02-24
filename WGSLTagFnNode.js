@@ -1,6 +1,7 @@
 /*
 * https://github.com/gkjohnson/three-wgsl-template-node/
-* by Garrett Johnson
+* wgslTagFn and wgslTagCode tag template function prototype nodes for integration
+* with TSL. By Garrett Johnson.
 */
 
 import { CodeNode, FunctionNode, Node } from 'three/webgpu';
